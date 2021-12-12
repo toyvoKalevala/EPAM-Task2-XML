@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<tariffs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.example.com/tariffs"
+         xsi:schemaLocation="http://www.example.com/tariffs tariffsExt.xsd">
+    <calltariffs id='ID-011' name='Light'>
+        <operatorname>A1</operatorname>
+        <payroll>10.00</payroll>
+        <SMSPrice>0.05</SMSPrice>
+    </calltariffs>
+    <calltariffs id='ID-012' name='Medium'>
+        <operatorname>A1</operatorname>
+        <payroll>15.00</payroll>
+        <SMSPrice>0.05</SMSPrice>
+    </calltariffs>
+    <internettariffs id='ID-021' name='Home'>
+        <operatorname>A1</operatorname>
+        <payroll>10.00</payroll>
+        <connectionspeed>50</connectionspeed>
+    </internettariffs>
+    <internettariffs id='ID-022' name='Home+'>
+        <operatorname>A1</operatorname>
+        <payroll>15.00</payroll>
+        <connectionspeed>100</connectionspeed>
+    </internettariffs>
+</tariffs>
