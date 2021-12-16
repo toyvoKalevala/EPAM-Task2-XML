@@ -1,5 +1,6 @@
-package com.epam.xml;
+package com.epam.xml.validator;
 
+import com.epam.xml.validator.XmlValidator;
 import org.junit.Assert;
 import org.junit.Test;
 
