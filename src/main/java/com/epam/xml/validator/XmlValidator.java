@@ -1,4 +1,4 @@
-package com.epam.xml;
+package com.epam.xml.validator;
 
 import org.xml.sax.SAXException;
 
