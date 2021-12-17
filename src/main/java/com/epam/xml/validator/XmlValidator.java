@@ -19,19 +19,15 @@ public class XmlValidator {
         String schemaName = "src/test/resources/tariffsExt.xsd";
         SchemaFactory factory = SchemaFactory.newInstance(language);
         File schemaLocation = new File(schemaName);
-        boolean isValid;
 
         try {
             Schema schema = factory.newSchema(schemaLocation);
             Validator validator = schema.newValidator();
             Source source = new StreamSource(xmlName);
             validator.validate(source);
-            isValid = true;
+            return true;
         } catch (SAXException | IOException e) {
-            e.printStackTrace();
-            isValid = false;
+            return false;
         }
-
-        return isValid;
     }
 }
