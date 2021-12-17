@@ -54,9 +54,7 @@ public class DomParser implements Parser {
                 Tariff tariff = buildInternetTariff(tariffElement);
                 tariffs.add(tariff);
             }
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (SAXException | IOException e) {
             e.printStackTrace();
         }
 
@@ -70,9 +68,9 @@ public class DomParser implements Parser {
         tariff.setName(tariffElement.getAttribute("name"));
         Operator operatorName = Operator.valueOf(getElementTextContent(tariffElement, "operatorname"));
         tariff.setOperatorName(operatorName);
-        double payRoll = Double.valueOf(getElementTextContent(tariffElement, "payroll"));
+        double payRoll = Double.parseDouble(getElementTextContent(tariffElement, "payroll"));
         tariff.setPayRoll(payRoll);
-        double smsPrice = Double.valueOf(getElementTextContent(tariffElement, "SMSPrice"));
+        double smsPrice = Double.parseDouble(getElementTextContent(tariffElement, "SMSPrice"));
         tariff.setSmsPrice(smsPrice);
         return tariff;
     }
@@ -84,14 +82,14 @@ public class DomParser implements Parser {
         tariff.setName(tariffElement.getAttribute("name"));
         Operator operatorName = Operator.valueOf(getElementTextContent(tariffElement, "operatorname"));
         tariff.setOperatorName(operatorName);
-        double payRoll = Double.valueOf(getElementTextContent(tariffElement, "payroll"));
+        double payRoll = Double.parseDouble(getElementTextContent(tariffElement, "payroll"));
         tariff.setPayRoll(payRoll);
-        int connectionspeed = Integer.valueOf(getElementTextContent(tariffElement, "connectionspeed"));
+        int connectionspeed = Integer.parseInt(getElementTextContent(tariffElement, "connectionspeed"));
         tariff.setConnectionSpeed(connectionspeed);
         return tariff;
     }
 
-    private static String getElementTextContent(Element element, String elementName) {
+    private String getElementTextContent(Element element, String elementName) {
         NodeList nList = element.getElementsByTagName(elementName);
         Node node = nList.item(0);
         return node.getTextContent();
