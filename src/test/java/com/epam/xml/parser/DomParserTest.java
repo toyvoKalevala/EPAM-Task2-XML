@@ -1,6 +1,5 @@
-package com.epam.xml.validator.parser;
+package com.epam.xml.parser;
 
-import com.epam.xml.parser.DomParser;
 import org.junit.Test;
 
 public class DomParserTest {
