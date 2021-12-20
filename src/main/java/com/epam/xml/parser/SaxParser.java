@@ -1,6 +1,7 @@
 package com.epam.xml.parser;
 
 import com.epam.xml.entity.Tariff;
+import com.epam.xml.handler.TariffHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;

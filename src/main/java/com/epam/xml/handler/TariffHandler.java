@@ -1,4 +1,4 @@
-package com.epam.xml.parser;
+package com.epam.xml.handler;
 
 import com.epam.xml.entity.CallTariff;
 import com.epam.xml.entity.InternetTariff;

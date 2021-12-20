@@ -21,7 +21,7 @@
             <element name="payroll" type="double"/>
         </sequence>
         <attribute name="id" type="tns:id" use="required"/>
-        <attribute name="name" type="string"/>
+        <attribute name="name" type="string" default="Basetariff"/>
     </complexType>
     <simpleType name="id">
         <restriction base="ID">
