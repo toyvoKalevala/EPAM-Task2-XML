@@ -27,8 +27,8 @@ public class DomParser implements Parser {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
             documentBuilder = factory.newDocumentBuilder();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
+        } catch (ParserConfigurationException exception) {
+            System.out.println("Error: " + exception.getMessage());
         }
     }
 
@@ -54,8 +54,8 @@ public class DomParser implements Parser {
                 Tariff tariff = buildInternetTariff(tariffElement);
                 tariffs.add(tariff);
             }
-        } catch (SAXException | IOException e) {
-            e.printStackTrace();
+        } catch (IOException | SAXException exception) {
+            System.out.println("Parsing error: " + exception.getMessage());
         }
 
         return tariffs;

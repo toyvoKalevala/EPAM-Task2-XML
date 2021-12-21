@@ -19,8 +19,8 @@ public class SaxParser implements Parser {
         try {
             reader = XMLReaderFactory.createXMLReader();
             reader.setContentHandler(tariffHandler);
-        } catch (SAXException e) {
-            e.printStackTrace();
+        } catch (SAXException exception) {
+            System.out.println("Handler creation error: " + exception.getMessage());
         }
     }
 
@@ -28,8 +28,8 @@ public class SaxParser implements Parser {
     public List<Tariff> parse(String file) {
         try {
             reader.parse(file);
-        } catch (IOException | SAXException e) {
-            e.printStackTrace();
+        } catch (IOException | SAXException exception) {
+            System.out.println("Parsing error: " + exception.getMessage());
         }
         return tariffHandler.getTariffs();
     }
