@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.com/tariffs"
+        xmlns:tns="http://www.example.com/tariffs" elementFormDefault="qualified">
+    <element name="tariffs">
+        <complexType>
+            <sequence>
+                <element ref="tns:tariff" minOccurs="2" maxOccurs="unbounded"/>
+            </sequence>
+        </complexType>
+    </element>
+    <complexType name="tariffs">
+        <sequence>
+            <element name="operatorname">
+                <simpleType>
+                    <restriction base="string">
+                        <enumeration value="A1"/>
+                        <enumeration value="MTS"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="payroll" type="double"/>
+        </sequence>
+        <attribute name="id" type="tns:id" use="required"/>
+        <attribute name="name" type="string" default="Basetariff"/>
+    </complexType>
+    <simpleType name="id">
+        <restriction base="ID">
+            <pattern value="(ID-)[0-9]{3}"/>
+        </restriction>
+    </simpleType>
+    <complexType name="calltariffs">
+        <complexContent>
+            <extension base="tns:tariffs">
+                <sequence>
+                    <element name="SMSPrice" type="double"/>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+    <complexType name="internettariffs">
+        <complexContent>
+            <extension base="tns:tariffs">
+                <sequence>
+                    <element name="connectionspeed" type="int"/>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+    <element name="tariff" type="tns:tariffs"/>
+    <element name="calltariffs" type="tns:calltariffs" substitutionGroup="tns:tariff"/>
+    <element name="internettariffs" type="tns:internettariffs" substitutionGroup="tns:tariff"/>
+</schema>
