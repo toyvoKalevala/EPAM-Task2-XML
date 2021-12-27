@@ -4,6 +4,8 @@ import com.epam.xml.entity.CallTariff;
 import com.epam.xml.entity.InternetTariff;
 import com.epam.xml.entity.Operator;
 import com.epam.xml.entity.Tariff;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -21,6 +23,7 @@ public class DomParser implements Parser {
 
     private List<Tariff> tariffs;
     private DocumentBuilder documentBuilder;
+    private static final Logger logger = LogManager.getLogger();
 
     public DomParser() {
         this.tariffs = new ArrayList<>();
@@ -28,7 +31,7 @@ public class DomParser implements Parser {
         try {
             documentBuilder = factory.newDocumentBuilder();
         } catch (ParserConfigurationException exception) {
-            System.out.println("Error: " + exception.getMessage());
+            logger.error("Error: " + exception.getMessage());
         }
     }
 
@@ -55,7 +58,7 @@ public class DomParser implements Parser {
                 tariffs.add(tariff);
             }
         } catch (IOException | SAXException exception) {
-            System.out.println("Parsing error: " + exception.getMessage());
+            logger.error("Parsing error: " + exception.getMessage());
         }
 
         return tariffs;

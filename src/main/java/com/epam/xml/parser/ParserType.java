@@ -2,5 +2,5 @@ package com.epam.xml.parser;
 
 public enum ParserType {
 
-    DOM, SAX, JAX
+    DOM, SAX, JAX, STAX
 }

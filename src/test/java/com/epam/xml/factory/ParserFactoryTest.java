@@ -38,4 +38,13 @@ public class ParserFactoryTest {
         //then
         Assert.assertEquals(expectedParser.getClass(), actualParser.getClass());
     }
+
+    @Test(expected = ParserFactoryExeption.class)
+    public void testReadShouldThrowDataException() throws ParserFactoryExeption {
+        //given
+        ParserFactory parserFactory = new ParserFactory();
+        //when
+        parserFactory.create(ParserType.STAX);
+        //then
+    }
 }

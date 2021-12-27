@@ -4,7 +4,8 @@ import com.epam.xml.entity.CallTariff;
 import com.epam.xml.entity.InternetTariff;
 import com.epam.xml.entity.Operator;
 import com.epam.xml.entity.Tariff;
-import jdk.nashorn.internal.codegen.CompilerConstants;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
@@ -15,9 +16,8 @@ public class TariffHandler extends DefaultHandler {
 
     private List<Tariff> tariffs;
     private Tariff current;
-    private CallTariff currentCallTariff;
-    private InternetTariff currentInternetTariff;
     private String elementName;
+    private static final Logger logger = LogManager.getLogger();
 
     public TariffHandler() {
         tariffs = new ArrayList<>();
@@ -28,6 +28,7 @@ public class TariffHandler extends DefaultHandler {
     }
 
     public void startElement(String uri, String localName, String qName, Attributes attrs) {
+        logger.debug("Begin to parse start element.");
         if ("calltariffs".equals(localName) || "internettariffs".equals(localName)) {
             switch (localName) {
                 case "calltariffs":
@@ -44,14 +45,16 @@ public class TariffHandler extends DefaultHandler {
         }
     }
 
-    public void endElement(String uri, String localName, String qName) {
+    public void endElement(String uri, String localName, String qualifiedName) {
+        logger.debug("Begin to parse end element.");
         if ("calltariffs".equals(localName) || "internettariffs".equals(localName)) {
             tariffs.add(current);
         }
     }
 
-    public void characters(char[] ch, int start, int length) {
-        String textValue = new String(ch, start, length).trim();
+    public void characters(char[] characters, int start, int length) {
+        logger.debug("Begin to parse characters.");
+        String textValue = new String(characters, start, length).trim();
         if (elementName != null) {
             switch (elementName) {
                 case "operatorname":
@@ -62,11 +65,11 @@ public class TariffHandler extends DefaultHandler {
                     current.setPayRoll(Double.parseDouble(textValue));
                     break;
                 case "SMSPrice":
-                    currentCallTariff = (CallTariff) current;
+                    CallTariff currentCallTariff = (CallTariff) current;
                     currentCallTariff.setSmsPrice(Double.parseDouble(textValue));
                     break;
                 case "connectionspeed":
-                    currentInternetTariff = (InternetTariff) current;
+                    InternetTariff currentInternetTariff = (InternetTariff) current;
                     currentInternetTariff.setConnectionSpeed(Integer.parseInt(textValue));
                     break;
             }

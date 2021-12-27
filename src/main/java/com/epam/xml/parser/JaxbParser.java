@@ -2,6 +2,8 @@ package com.epam.xml.parser;
 
 import com.epam.xml.entity.Tariff;
 import com.epam.xml.entity.Tariffs;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -12,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JaxbParser implements Parser {
+
+    private static final Logger logger = LogManager.getLogger();
 
     public List<Tariff> parse(String file) {
 
@@ -24,7 +28,7 @@ public class JaxbParser implements Parser {
             Tariffs tariffs = (Tariffs) unmarshaller.unmarshal(reader);
             tariffList = tariffs.getTariffsList();
         } catch (JAXBException | FileNotFoundException exception) {
-            System.out.println("Parsing error: " + exception.getMessage());
+            logger.error("Parsing error: " + exception.getMessage());
         }
         return tariffList;
     }

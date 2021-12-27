@@ -2,6 +2,8 @@ package com.epam.xml.parser;
 
 import com.epam.xml.entity.Tariff;
 import com.epam.xml.handler.TariffHandler;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
@@ -13,6 +15,7 @@ public class SaxParser implements Parser {
 
     private TariffHandler tariffHandler;
     private XMLReader reader;
+    private static final Logger logger = LogManager.getLogger();
 
     public SaxParser() {
         tariffHandler = new TariffHandler();
@@ -20,7 +23,7 @@ public class SaxParser implements Parser {
             reader = XMLReaderFactory.createXMLReader();
             reader.setContentHandler(tariffHandler);
         } catch (SAXException exception) {
-            System.out.println("Handler creation error: " + exception.getMessage());
+            logger.error("Handler creation error: " + exception.getMessage());
         }
     }
 
@@ -29,7 +32,7 @@ public class SaxParser implements Parser {
         try {
             reader.parse(file);
         } catch (IOException | SAXException exception) {
-            System.out.println("Parsing error: " + exception.getMessage());
+            logger.error("Parsing error: " + exception.getMessage());
         }
         return tariffHandler.getTariffs();
     }
